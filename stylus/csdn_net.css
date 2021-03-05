@@ -1,0 +1,26 @@
+#asideProfile,
+#asideSearchArticle,
+#asideHotArticle,
+#asideCategory,
+#asideNewComments,
+#asideArchive,
+#blogColumnPayAdvert,
+#csdn-toolbar,
+#footerRightAds,
+.comment-box,
+.csdn-side-toolbar,
+.blog-footer-bottom,
+.kind_person,
+.left-toolbox,
+.recommend-box,
+.template-box
+{
+  display: none !important;
+  height: 0;
+  overflow: hidden;
+}
+
+main
+{
+  width: 100% !important;
+}

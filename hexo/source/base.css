@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a, div {
+  display: inline-block;
+}
+
+a, a:visited {
+  background-color: transparent;
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bolder;
+  margin: .4em 0;
+}
+
+h1 {font-size: 32px}
+h2 {font-size: 24px}
+h3 {font-size: 20px}
+h4 {font-size: 16px}
+h5 {font-size: 14px}
+h6 {font-size: 12px}
+
+hr {
+  background: transparent;
+  border-bottom: 1px solid #dfe2e5;
+  border: 0;
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+html {
+  font-family: fira code, Microsoft YaHei, -apple-system, BlinkMacSystemFont, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+img {
+  border-style: none;
+}
+
+strong {
+  font-weight: bolder;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0;
+}
+
+.footer, .menu {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  font-size: 8px;
+  left: 50%;
+  overflow: hidden;
+  padding: .5em;
+  position: fixed;
+  text-align: center;
+  transform: translateX(-50%);
+  vertical-align: middle;
+  width: 100%;
+  z-index: 1;
+}
+
+.footer a, .menu a, .post-title {
+  border-bottom: 1px inset purple;
+  display: inline-block;
+  margin: 0 .5em;
+  padding: .5em;
+}
+
+.date_td {
+  color: deeppink;
+  text-align: center;
+}
+
+.footer {
+  bottom: 0;
+}
+
+.menu {
+  top: 0;
+}
+
+.middle {
+  left: 2%;
+  margin: 2em 0;
+  position: relative;
+  width: 96%;
+}
+
+.middle table {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.middle table td {
+  width: min-content;
+}
+
+.middle table a:hover {
+  background-color: whitesmoke;
+  color: deeppink;
+}
+
+.post-title {width: 40%}

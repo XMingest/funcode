@@ -1,0 +1,19 @@
+digraph template {
+  graph [
+    bgcolor = "invis",
+    compound = true,
+    concentrate = true,
+    fontname = "FiraCode Retina",
+    fontnames = "monospace",
+    fontsize = 12,
+    margin = 0,
+    nodesep = 1,
+    pad = .5,
+    ranksep = .75,
+    splines = "polyline",
+  ]
+  node [fontcolor = "green", shape = "plaintext"]
+  edge [arrowhead = "open", color = "white", decorate = true, style = bold]
+  
+  template -> newgraph
+}

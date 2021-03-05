@@ -1,0 +1,4 @@
+*.egg*
+*.py[cod]
+*$py.class
+*cache*

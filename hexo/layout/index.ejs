@@ -1,0 +1,17 @@
+<div class="middle">
+  <table>
+    <tr>
+      <th></th>
+      <th>发布日期</th>
+      <th>更新日期</th>
+    </tr>
+    <% const posts = site.posts.sort('-date') %>
+    <% posts.each(function (post) { %>
+      <tr>
+        <td><a href="<%- url_for(post.path) %>"><%= post.title %></a></td>
+        <td class="date_td"><%- full_date(post.date, 'YYYY-MM-DD') %></td>
+        <td class="date_td"><%- full_date(post.updated, 'YYYY-MM-DD') %></td>
+      </tr>
+    <% }) %>
+  </table>
+</div>
