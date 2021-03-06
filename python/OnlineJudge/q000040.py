@@ -32,11 +32,6 @@ def calculate_noparentheses(expression: str):
 
 def calculate(expression: str):
     while True:
-        try:
-            result = float(expression)
-            return result
-        except ValueError:
-            pass
         start = 0
         end = 0
         for i in range(len(expression)):
