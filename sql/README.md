@@ -28,6 +28,13 @@ mysqladmin -u${user} -p${pswd} password ${new_pswd}
 
 因此应当采取`load data`插入数据，并在数据完成后建立索引
 
+但是使用`load data`等指令新版本下需要配置，理论上应该配置至安全的路径
+
+```config
+[mysqld]
+secure_file_priv=''
+```
+
 如存在文件`data`如下
 
 ```
