@@ -85,6 +85,30 @@ ffmpeg -i in.mp4 -vf scale=1280:-1 out.mp4 # 宽度改为1280，高度原比例�
 ffmpeg -i in.mp4 -vf scale=iw/2:ih/4 out.mp4 # 宽度减半，高度为四分之一
 ```
 
+## 完整脚本
+
+参考[dvlden/ffmpeg.md](https://gist.github.com/dvlden/b9d923cb31775f92fa54eb8c39ccd5a9)
+
+原文使用的音频解码在个人使用时ffmpeg报错，所以统一换为aac
+
+主要关注`-b:v`、`-minrate`、`-maxrate`、`-bufsize`、`-vf scale=`这几处
+
+分别代表视频码率，最小码率，最大码率，缓冲大小，缩放分辨率
+
+```shell
+# MP4 - 1080p
+ffmpeg -i in.mp4 -preset slow -codec:a aac -b:a 128k -codec:v libx264 -pix_fmt yuv420p -b:v 4500k -minrate 4500k -maxrate 9000k -bufsize 9000k -vf scale=-1:1080 out.mp4
+
+# MP4 - 720p
+ffmpeg -i in.mp4 -preset slow -codec:a aac -b:a 128k -codec:v libx264 -pix_fmt yuv420p -b:v 2500k -minrate 1500k -maxrate 4000k -bufsize 5000k -vf scale=-1:720 out.mp4
+
+# MP4 - 480p
+ffmpeg -i in.mp4 -preset slow -codec:a aac -b:a 128k -codec:v libx264 -pix_fmt yuv420p -b:v 1000k -minrate 500k -maxrate 2000k -bufsize 2000k -vf scale=-1:480 out.mp4
+
+# MP4 - 360p
+ffmpeg -i in.mp4 -preset slow -codec:a aac -b:a 128k -codec:v libx264 -pix_fmt yuv420p -b:v 750k -minrate 400k -maxrate 1000k -bufsize 1500k -vf scale=-1:360 out.mp4
+```
+
 # 使用ffmpeg合并目录下的ts视频
 
 适用于h264格式的ts：
