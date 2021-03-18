@@ -29,7 +29,7 @@ pacman -S base-devel clang cmake compression development \
 - Gimp: mingw-w64-x86_64-gimp
 - Graphviz: mingw-w64-x86_64-graphviz
 - lua: mingw-w64-x86_64-lua mingw-w64-x86_64-lua-lpeg mingw-w64-x86_64-lua-luarocks mingw-w64-x86_64-lua-mpack
-- Qt: mingw-w64-x86_64-qt-creator
+- Qt: mingw-w64-x86_64-clang mingw-w64-x86_64-cmake mingw-w64-x86_64-qt-creator mingw-w64-x86_64-gdb
 - Ruby: mingw-w64-x86_64-ruby
 - Rust: mingw-w64-x86_64-rust
     - 通常需要添加Windows用户目录下的.cargo/bin到PATH中
