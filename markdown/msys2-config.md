@@ -40,17 +40,23 @@ pacman -S base-devel clang cmake compression development \
 ## bashrc
 
 ```shell
+# rust
+export RUSTUP_DIST_SERVER='https://mirrors.tuna.tsinghua.edu.cn/rustup'
+
 # 每等待输入即显示，其中使用了方框绘制字符
 export PS1='\n╭\[\e[31m\]AT\[\e[0m\] \[\e[32m\]\t\[\e[0m\] \[\e[31m\]IN\[\e[0m\] \[\e[33m\]\w\[\e[0m\]\n╰'
 
 # alias
 alias cnvgbk='iconv -f gbk'
+alias cp='cp -v'
 alias la='ls -A --color=auto'
 alias ll='ls -hl --color=auto'
 alias ls='ls --color=auto'
+alias mv='mv -v'
+alias rm='rm -v'
 
 # path
-PATH="/usr/local/bin:/usr/bin:/bin:/opt/bin"
+PATH='/usr/local/bin:/usr/bin:/bin:/opt/bin'
 PATH="$PATH:/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl"
 PATH="$PATH:/mingw64/bin"
 PATH="$PATH:/c/Windows/SysWOW64:/c/Windows:/c/Windows/SysWOW64/Wbem:/c/Windows/SysWOW64/WindowsPowerShell/v1.0/"

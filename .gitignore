@@ -1,4 +1,8 @@
+.metadata/
+.project
 *.egg*
 *.py[cod]
 *$py.class
 *cache*
+languageServers-log/
+target/
