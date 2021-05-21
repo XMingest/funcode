@@ -113,6 +113,26 @@ Socket结构物料则无需FPC、Connector
     1/5"
     1/11"
 
+## 技术指标
+
+#### Sensitivity
+
+灵敏度
+$$mv / \left(lux · sec\right)$$
+指传感器模块对光的敏感程度，1lux照度下每秒电压，值越高越灵敏
+
+#### Dark shading/current
+
+暗电流
+$$mv / sec$$
+$$pA / cm2$$
+
+
+- Dimension                             尺寸
+- Dynamic Range(dB)                     动态范围
+- Frame rate(frame per second)          帧率
+- Power consumption(mW)                 功耗
+- Signal-to-Noise ratio(dB)             信噪比
 
 # REF
 
