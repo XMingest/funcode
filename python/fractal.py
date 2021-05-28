@@ -18,7 +18,7 @@ def draw_mandelbrot(cx, cy, d):
     x0, x1, y0, y1 = cx - d, cx + d, cy - d, cy + d
     y, x = np.ogrid[y0:y1:200j, x0:x1:200j]
     c = x + y * 1j
-    mandelbrot = np.frompyfunc(iter_point, 1, 1)(c).astype(np.float)
+    mandelbrot = np.frompyfunc(iter_point, 1, 1)(c).astype(float)
     pl.imshow(mandelbrot, cmap=cm.jet, extent=[x0, x1, y0, y1])
     pl.gca().set_axis_off()
     return pl

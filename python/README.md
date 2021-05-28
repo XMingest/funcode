@@ -1,3 +1,21 @@
+# HERE
+
+## computer_on
+
+根据Windows事件日志得到每天电脑第一次活动与最后一次活动的时间，进而推算当日的工作时间
+
+默认每日12:00-13:30，18:00-18:30休息，不计入工作时间
+
+## limit_xlsx_gen
+
+通过特定格式的门限文件（xml）生成相应表格文件
+
+pyinstaller构建
+
+```shell
+pyinstaller -F -i icon.ico -n 门限表格生成 -w limit_xlsx_gen.py
+```
+
 # 包结构修复
 
 ```shell

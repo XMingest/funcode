@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
-from PIL import Image, ImageFilter
+
+from PIL import Image
 
 
 def areas_exist(x, y, areas):

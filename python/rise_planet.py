@@ -3,7 +3,8 @@ import gc
 import json
 import random
 from pathlib import Path
-from PIL import Image, ImageFilter
+
+from PIL import Image
 
 
 class RisePlanet:
@@ -74,7 +75,7 @@ class RisePlanet:
                 hmax = h
             if h > 0:
                 hover += 1
-        return f'[{round(hmin)}, {round(hmax)}], {hover} / {self.size ** 2}'
+        return f'[{round(hmin)}, {round(hmax)}], {hover} / {self.size**2}'
 
     def load_json(self, file):
         with open(file, 'r') as input:

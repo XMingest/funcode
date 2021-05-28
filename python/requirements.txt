@@ -1,0 +1,6 @@
+fire
+jupyter
+matplotlib
+openpyxl
+pyinstaller
+pywin32

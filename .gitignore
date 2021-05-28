@@ -1,6 +1,7 @@
-.idea/
-.metadata/
+.idea
+.metadata
 .project
+.venv
 *.egg*
 *.py[cod]
 *$py.class
