@@ -1,5 +1,5 @@
 import math
-import turtle
+from turtle import Screen, Turtle
 
 
 class Point:
@@ -9,13 +9,10 @@ class Point:
 
 class AutoTurtle:
     def __init__(self):
+        self.screen = Screen()
         self.center = Point()
         self.size = 128
-        self.turtle = turtle.Turtle()
-        try:
-            self.turtle.reset()
-        except turtle.Terminator:
-            self.turtle.reset()
+        self.turtle = Turtle()
         self.turtle.pencolor('silver')
         self.turtle.pensize(4)
         self.turtle.speed(0)
@@ -43,8 +40,15 @@ class AutoTurtle:
             self.turtle.rt(360 / n)
         return self
 
+    def set_center(self, x, y):
+        """改变中心"""
+        self.center.x = x
+        self.center.y = y
+        return self
+
     def snow_draw(self, n):
         """雪花曲线"""
+
         def __action(n, length):
             if n == 0:
                 self.turtle.fd(length)
@@ -64,7 +68,4 @@ class AutoTurtle:
 
 
 if __name__ == "__main__":
-    at = AutoTurtle()
-    at.polygon(16) \
-      .snow_draw(2)
-    input()
+    AutoTurtle().helical(73).set_center(-320, 0).polygon(16).set_center(280, 0).snow_draw(3).screen.exitonclick()

@@ -16,6 +16,30 @@ pyinstaller构建
 pyinstaller -F -i icon.ico -n 门限表格生成 -w limit_xlsx_gen.py
 ```
 
+## mandelbrot
+
+Mandelbrot集合，曼德博集合，设
+
+$$
+\begin{array}{}
+  Z_1 \left( c \right) = c \\
+  Z_{n + 1} \left( c \right) = Z^2_n \left( c \right) + c \\
+  n \ge 1 \land n \in N
+\end{array}
+$$
+
+则
+
+$$ M = \left \{ c | c \in C \land \exists a \in R \forall i \left| Z_i \right| \lt a \right \} $$
+
+存在三个定理
+
+1. $$ \left| c \right| \le \frac14 \to c \in M $$
+1. $$ \left| c \right| \gt 2 \to c \notin M $$
+1. $$ c \in M \to \forall i \left| Z_i \right| \le 2 $$
+
+因此只需要`|c|`在`(0.25, 2]`区间，迭代一定次数后仍旧不大于`2`的复数并展示即可
+
 # 包结构修复
 
 ```shell

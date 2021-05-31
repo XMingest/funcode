@@ -2,6 +2,7 @@
 .metadata
 .project
 .venv
+.vscode
 *.egg*
 *.py[cod]
 *$py.class
