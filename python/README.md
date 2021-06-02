@@ -6,6 +6,13 @@
 
 默认每日12:00-13:30，18:00-18:30休息，不计入工作时间
 
+## limitupdater
+
+门限文件解析，并且按照预定规则展示修改前后比较，可由用户进行检查并进一步修改
+
+- pyinstaller: `pyinstaller -F -i ../icon.ico -n 极差修改工具 -w __main__.py`
+- ui to py: `pyside2-uic -o ui_main_window.py main_window.ui`
+
 ## limit_xlsx_gen
 
 通过特定格式的门限文件（xml）生成相应表格文件

@@ -31,7 +31,6 @@ def get_config_item(path):
     </TestItem>
 </TestItems>
 </MachineTestStandard>
-
     ```
     则从中得到
     ```python
@@ -71,7 +70,7 @@ def get_config_item(path):
                 root = Et.fromstring(text.decode('GBK'))
     # 格式化数据
     config_data = {}
-    for test_item in root.findall('.//TestItem'):
+    for test_item in root.findall('.//TestItem[@Name]'):
         test_screen = test_item.attrib['Name']
         for algorithm_item in test_item.findall('.//AlgorithmItem'):
             algorithm = algorithm_item.attrib['Name']

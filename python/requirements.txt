@@ -3,4 +3,5 @@ jupyter
 matplotlib
 openpyxl
 pyinstaller
+PySide2
 pywin32
