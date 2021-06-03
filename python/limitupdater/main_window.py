@@ -3,7 +3,7 @@ import time
 from pathlib import Path
 
 from PySide2 import QtCore
-from PySide2.QtGui import QColor, QIcon
+from PySide2.QtGui import QColor
 from PySide2.QtWidgets import QFileDialog, QMainWindow, QTreeWidgetItem
 
 from limitupdater.limit_xml import LimitXml
@@ -29,6 +29,8 @@ class MainWindow(QMainWindow):
         xml_struct.itemClicked.connect(self.handle_item_click)
         # 导入文件
         self.ui.act_load.triggered.connect(self.handle_load)
+        # 导出文件
+        self.ui.act_output.triggered.connect(self.handle_output)
         # 提交修改
         self.ui.btn_item_submit.clicked.connect(self.handle_item_submit)
         return
@@ -161,4 +163,18 @@ class MainWindow(QMainWindow):
                 self.logging('门限文件解析失败')
         else:
             self.logging(f'取消门限文件导入')
+        return
+
+    @QtCore.Slot()
+    def handle_output(self):
+        if self.limit is None:
+            self.logging('未加载门限文件')
+            return
+        self.logging('正在导出')
+        limit_fp = QFileDialog.getSaveFileName(self, '保存修改后的门限文件至', filter='门限文件(*.xml)')[0]
+        if limit_fp:
+            self.limit.write_updated_xml(limit_fp)
+            self.logging('导出完毕')
+        else:
+            self.logging(f'取消门限文件保存')
         return
