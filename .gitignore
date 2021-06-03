@@ -5,7 +5,10 @@
 .vscode
 *.egg*
 *.py[cod]
+*.spec
 *$py.class
 *cache*
-languageServers-log/
-target/
+build
+dist
+languageServers-log
+target

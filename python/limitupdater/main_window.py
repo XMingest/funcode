@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+import functools
 import time
 from pathlib import Path
 
 from PySide2 import QtCore
 from PySide2.QtGui import QColor
-from PySide2.QtWidgets import QFileDialog, QMainWindow, QTreeWidgetItem
+from PySide2.QtWidgets import QFileDialog, QMainWindow, QMessageBox, QTreeWidgetItem
 
-from limitupdater.limit_xml import LimitXml
-from limitupdater.ui_main_window import Ui_MainWindow
+from limit_xml import LimitXml
+from ui_main_window import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):
@@ -17,22 +18,31 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
+        ui = Ui_MainWindow()
+        self.ui = ui
+        ui.setupUi(self)
         # 获取加载ui后的原始标题
         self.origin_title = self.windowTitle()
         # 结构视图调整
-        xml_struct = self.ui.xml_structure
+        xml_struct = ui.xml_structure
         xml_struct.setColumnWidth(0, 462)
         xml_struct.setColumnWidth(1, 128)
         xml_struct.setColumnWidth(2, 128)
         xml_struct.itemClicked.connect(self.handle_item_click)
         # 导入文件
-        self.ui.act_load.triggered.connect(self.handle_load)
+        ui.act_load.triggered.connect(self.handle_load)
         # 导出文件
-        self.ui.act_output.triggered.connect(self.handle_output)
+        ui.act_output.triggered.connect(self.handle_output)
+        ui.act_xlsx_record.triggered.connect(self.handle_xlsx_record)
         # 提交修改
-        self.ui.btn_item_submit.clicked.connect(self.handle_item_submit)
+        ui.btn_item_submit.clicked.connect(self.handle_item_submit)
+        # 收紧按钮
+        for btn, size in (
+            (ui.btn_tighten_002, .002), (ui.btn_tighten_003, .003), (ui.btn_tighten_004, .004),
+            (ui.btn_tighten_01, .01), (ui.btn_tighten_05, .05), (ui.btn_tighten5, 5), (ui.btn_tighten10, 10),
+            (ui.btn_tighten100, 100),
+        ):
+            btn.clicked.connect(functools.partial(self.handle_tighten_range, size))
         return
 
     def expand_title(self, info=None):
@@ -50,8 +60,8 @@ class MainWindow(QMainWindow):
         :param message:
         :return:
         """
-        self.logs.append(f'{time.strftime("[%Y-%m-%d %H:%M:%S]"): <32}{message}')
-        self.ui.statusbar.showMessage(f'{message}')
+        self.logs.append(f'{time.strftime("[%Y-%m-%d %H:%M:%S][INFO]"): <32}{message}')
+        self.ui.statusbar.showMessage(f'{time.strftime("[%Y-%m-%d %H:%M:%S]")}{message}')
         return self
 
     def refresh_xml_struct(self):
@@ -84,7 +94,7 @@ class MainWindow(QMainWindow):
                         need_expand_algorithm = True
                     elif criterion_data[1]:
                         # 自动修改置为红色
-                        criterion_item.setText(2, criterion_data[2])
+                        criterion_item.setText(2, criterion_data[1])
                         criterion_item.setTextColor(2, QColor.fromRgb(255, 0, 0))
                         need_expand_algorithm = True
                     algorithm_item.addChild(criterion_item)
@@ -95,6 +105,18 @@ class MainWindow(QMainWindow):
                 xml_struct.expandItem(screen_item)
         return self
 
+    def warning(self, message):
+        """
+        显示警告
+        :param message:
+        :return:
+        """
+        self.logs.append(f'{time.strftime("[%Y-%m-%d %H:%M:%S][WARN]"): <32}{message}')
+        QMessageBox.warning(self, '警告', f'{message}')
+        return self
+
+    # TODO: 右键菜单
+
     # 槽
     @QtCore.Slot(QTreeWidgetItem)
     def handle_item_click(self, item: QTreeWidgetItem):
@@ -103,15 +125,15 @@ class MainWindow(QMainWindow):
             parents = [item]
             while parents[-1]:
                 parents.append(parents[-1].parent())
-            parents.reverse()
-            parents = [parent.text(0) for parent in parents if parent]
+            parents.pop()
             # 找到当前节点对应数据
             self.current_item_data = None
-            for parent in parents:
-                self.current_item_data = (self.current_item_data[parent]
+            while parents:
+                parent = parents.pop()
+                self.current_item_data = (self.current_item_data[parent.text(0)]
                                           if self.current_item_data else
-                                          self.limit.data[parent])
-            if not isinstance(self.current_item_data, list) or len(self.current_item_data) < 3:
+                                          self.limit.data[parent.text(0)])
+            if not isinstance(self.current_item_data, list) or len(self.current_item_data) < 4:
                 self.current_item_data = None
                 return
             # 数据
@@ -127,25 +149,26 @@ class MainWindow(QMainWindow):
                 origin_val = self.current_item_data[index]
                 index -= 1
             self.ui.input_range.setText(origin_val)
-            self.current_item_data.append(parents)
         return
 
     @QtCore.Slot()
     def handle_item_submit(self):
-        # 检查是否有所更改
-        if self.current_item_data:
-            # 获得当前值
-            origin_val = None
-            index = 2
-            while origin_val is None:
-                origin_val = self.current_item_data[index]
-                index -= 1
-            # 输入值与
-            if origin_val != self.ui.input_range.text():
-                self.logging((f'{".".join(self.current_item_data[3])}: '
-                              f'{origin_val} -> {self.ui.input_range.text()}'))
-                self.current_item_data[2] = self.ui.input_range.text()
-                self.refresh_xml_struct()
+        # 检查是否选中某项
+        if not self.current_item_data:
+            self.logging('未选中测试项')
+            return
+        # 获得当前值
+        origin_val = None
+        index = 2
+        while origin_val is None:
+            origin_val = self.current_item_data[index]
+            index -= 1
+        # 输入值与
+        if origin_val != self.ui.input_range.text():
+            self.logging((f'{".".join(self.current_item_data[3])}: '
+                          f'{origin_val} -> {self.ui.input_range.text()}'))
+            self.current_item_data[2] = self.ui.input_range.text()
+            self.refresh_xml_struct()
         return
 
     @QtCore.Slot()
@@ -160,7 +183,7 @@ class MainWindow(QMainWindow):
                 self.refresh_xml_struct()
                 self.logging('门限文件解析完成')
             else:
-                self.logging('门限文件解析失败')
+                self.warning('门限文件解析失败')
         else:
             self.logging(f'取消门限文件导入')
         return
@@ -173,8 +196,48 @@ class MainWindow(QMainWindow):
         self.logging('正在导出')
         limit_fp = QFileDialog.getSaveFileName(self, '保存修改后的门限文件至', filter='门限文件(*.xml)')[0]
         if limit_fp:
+            try:
+                is_same_file = Path(limit_fp).samefile(self.limit.path)
+            except FileNotFoundError:
+                is_same_file = False
+            if is_same_file:
+                self.warning('不允许将修改后的门限文件保存至源文件')
+                self.logging(f'取消门限文件保存')
+                return
             self.limit.write_updated_xml(limit_fp)
             self.logging('导出完毕')
         else:
             self.logging(f'取消门限文件保存')
+        return
+
+    @QtCore.Slot()
+    def handle_tighten_range(self, size):
+        # 检查是否选中某项
+        if not self.current_item_data:
+            self.logging('未选中测试项')
+            return
+        # 收紧门限
+        self.limit.tighten_range(self.current_item_data[3], size)
+        self.ui.input_range.setText(self.current_item_data[2])
+        self.logging((f'{".".join(self.current_item_data[3])}: '
+                      f'{self.current_item_data[0]} -> {self.current_item_data[2]}'))
+        self.refresh_xml_struct()
+        return
+
+    @QtCore.Slot()
+    def handle_xlsx_record(self):
+        if self.limit is None:
+            self.logging('未加载门限文件')
+            return
+        self.logging('正在导出')
+        limit_fp = QFileDialog.getSaveFileName(self, '保存当前修改记录至', filter='记录文件(*.xlsx)')[0]
+        if limit_fp:
+            try:
+                self.limit.record_xlsx(limit_fp)
+            except PermissionError:
+                self.warning('所选文件无写入权限，可能是已被打开')
+                return
+            self.logging('导出完毕')
+        else:
+            self.logging(f'取消记录导出')
         return

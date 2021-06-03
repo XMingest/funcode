@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>512</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,9 +22,26 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="edit_area">
       <item>
        <layout class="QGridLayout" name="item_edit">
+        <item row="9" column="0">
+         <widget class="QLabel" name="tl_input">
+          <property name="text">
+           <string>手动修改</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" colspan="3">
+         <widget class="QLabel" name="origin_range">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="0">
          <widget class="QLabel" name="tl_origin">
           <property name="text">
@@ -35,17 +52,48 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="4" column="0">
+         <widget class="Line" name="tl_ttn_tp_spl">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" rowspan="3">
+         <widget class="QLabel" name="tl_tighten">
+          <property name="text">
+           <string>收紧</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="6" rowspan="8">
+         <widget class="Line" name="item_edit_rt_border">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="Line" name="tl_ttn_bt_spl">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="3">
          <widget class="QLabel" name="auto_range">
           <property name="text">
            <string/>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="origin_range">
+        <item row="7" column="2">
+         <widget class="QPushButton" name="btn_tighten5">
           <property name="text">
-           <string/>
+           <string>5</string>
           </property>
          </widget>
         </item>
@@ -59,17 +107,28 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="tl_input">
-          <property name="text">
-           <string>手动修改</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <item row="2" column="1" rowspan="8">
+         <widget class="Line" name="tl_op_spl">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="7" column="3">
+         <widget class="QPushButton" name="btn_tighten10">
+          <property name="text">
+           <string>10</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="4">
+         <widget class="QPushButton" name="btn_tighten100">
+          <property name="text">
+           <string>100</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="2" colspan="2">
          <widget class="QLineEdit" name="input_range">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -79,14 +138,63 @@
           </property>
          </widget>
         </item>
+        <item row="9" column="4">
+         <widget class="QPushButton" name="btn_item_submit">
+          <property name="text">
+           <string>保存</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2" colspan="3">
+         <widget class="Line" name="tighten_top_spl">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="2" colspan="3">
+         <widget class="Line" name="tighten_bottom_spl">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="4">
+         <widget class="QPushButton" name="btn_tighten_003">
+          <property name="text">
+           <string>.003</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <widget class="QPushButton" name="btn_tighten_004">
+          <property name="text">
+           <string>.004</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QPushButton" name="btn_tighten_01">
+          <property name="text">
+           <string>.01</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="4">
+         <widget class="QPushButton" name="btn_tighten_05">
+          <property name="text">
+           <string>.05</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2" colspan="2">
+         <widget class="QPushButton" name="btn_tighten_002">
+          <property name="text">
+           <string>.002</string>
+          </property>
+         </widget>
+        </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_item_submit">
-        <property name="text">
-         <string>保存</string>
-        </property>
-       </widget>
       </item>
       <item>
        <spacer name="item_edit_spacer">
@@ -174,9 +282,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1024</width>
-     <height>23</height>
+     <width>1280</width>
+     <height>27</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <widget class="QMenu" name="menu_file">
     <property name="title">
@@ -195,7 +309,14 @@
    </widget>
    <addaction name="menu_file"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
   <action name="act_load">
    <property name="text">
     <string>打开</string>
@@ -217,6 +338,9 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>xml_structure</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
