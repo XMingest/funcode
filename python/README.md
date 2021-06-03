@@ -15,10 +15,9 @@
 - openpyxl
 - pyinstaller
 - PySide2
+- `WARNING: lib not found: shiboken2.abi3.dll dependency of` 在`site-packages/shiboken2/`下找到相应组件复制到`site-packages/PySide2/`
+- `pyinstaller -F -i icon.ico -n 极差修改工具 -w __main__.py`
 
-`pyinstaller -F -i ../icon.ico -n 极差修改工具 -w __main__.py`
-
-`WARNING: lib not found: shiboken2.abi3.dll dependency of` 在`site-packages/shiboken2/`下找到相应组件复制到`site-packages/PySide2/`
 
 #### ui to py
 
