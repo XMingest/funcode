@@ -138,6 +138,17 @@ class LimitXml:
                                                (5 if '120' in screen else 10), is_auto=True)
         return
 
+    def clear_auto_update(self):
+        """
+        清空自动修改记录
+        :return:
+        """
+        for screen, screen_item in self.data.items():
+            for algorithm, algorithm_item in screen_item.items():
+                for criterion, criterion_item in algorithm_item.items():
+                    criterion_item[1] = None
+        return self
+
     def read_limit_xml(self):
         """
         读取门限文件

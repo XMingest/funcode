@@ -10,14 +10,16 @@
 
 门限文件解析，并且按照预定规则展示修改前后比较，可由用户进行检查并进一步修改
 
+建议使用3.8+版本，在3.8之后，ElementTree不会自动重排节点属性
+
 #### pyinstaller
 
 - openpyxl
 - pyinstaller
 - PySide2
+- QDarkStyle
 - `WARNING: lib not found: shiboken2.abi3.dll dependency of` 在`site-packages/shiboken2/`下找到相应组件复制到`site-packages/PySide2/`
 - `pyinstaller -F -i icon.ico -n 极差修改工具 -w __main__.py`
-
 
 #### ui to py
 

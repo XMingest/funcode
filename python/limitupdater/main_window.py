@@ -3,6 +3,7 @@ import functools
 import time
 from pathlib import Path
 
+import qdarkstyle
 from PySide2 import QtCore
 from PySide2.QtGui import QColor
 from PySide2.QtWidgets import QFileDialog, QMainWindow, QMessageBox, QTreeWidgetItem
@@ -21,6 +22,8 @@ class MainWindow(QMainWindow):
         ui = Ui_MainWindow()
         self.ui = ui
         ui.setupUi(self)
+        # 美化
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
         # 获取加载ui后的原始标题
         self.origin_title = self.windowTitle()
         # 结构视图调整
@@ -36,6 +39,8 @@ class MainWindow(QMainWindow):
         ui.act_xlsx_record.triggered.connect(self.handle_xlsx_record)
         # 提交修改
         ui.btn_item_submit.clicked.connect(self.handle_item_submit)
+        # 查看日志
+        ui.act_view_log_hist.triggered.connect(self.handle_show_logs)
         # 收紧按钮
         for btn, size in (
             (ui.btn_tighten_002, .002), (ui.btn_tighten_003, .003), (ui.btn_tighten_004, .004),
@@ -178,6 +183,9 @@ class MainWindow(QMainWindow):
         if limit_fp.is_file():
             self.logging('解析门限文件')
             self.limit = LimitXml(limit_fp)
+            # 相关菜单项绑定
+            self.ui.act_au_clear.triggered.connect(lambda: (self.limit.clear_auto_update(), self.refresh_xml_struct()))
+            self.ui.act_au_exec.triggered.connect(lambda: (self.limit.auto_update(), self.refresh_xml_struct()))
             if self.limit.data:
                 self.expand_title(limit_fp)
                 self.refresh_xml_struct()
@@ -208,6 +216,12 @@ class MainWindow(QMainWindow):
             self.logging('导出完毕')
         else:
             self.logging(f'取消门限文件保存')
+        return
+
+    @QtCore.Slot()
+    def handle_show_logs(self):
+        if self.logs:
+            QMessageBox.information(self, '查看日志', '\n'.join(self.logs))
         return
 
     @QtCore.Slot()

@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>极差合入工具</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="font">
     <font>
@@ -219,6 +222,9 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="animated">
        <bool>true</bool>
       </property>
@@ -305,9 +311,31 @@
     </widget>
     <addaction name="act_load"/>
     <addaction name="menu_output"/>
+    <addaction name="separator"/>
     <addaction name="act_exit"/>
    </widget>
+   <widget class="QMenu" name="menu_edit">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+    <widget class="QMenu" name="menu_auto_update">
+     <property name="title">
+      <string>自动修改</string>
+     </property>
+     <addaction name="act_au_exec"/>
+     <addaction name="act_au_clear"/>
+    </widget>
+    <addaction name="menu_auto_update"/>
+   </widget>
+   <widget class="QMenu" name="menu_log">
+    <property name="title">
+     <string>日志</string>
+    </property>
+    <addaction name="act_view_log_hist"/>
+   </widget>
    <addaction name="menu_file"/>
+   <addaction name="menu_edit"/>
+   <addaction name="menu_log"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="font">
@@ -335,6 +363,21 @@
   <action name="act_exit">
    <property name="text">
     <string>退出</string>
+   </property>
+  </action>
+  <action name="act_view_log_hist">
+   <property name="text">
+    <string>查看</string>
+   </property>
+  </action>
+  <action name="act_au_exec">
+   <property name="text">
+    <string>执行</string>
+   </property>
+  </action>
+  <action name="act_au_clear">
+   <property name="text">
+    <string>清除</string>
    </property>
   </action>
  </widget>
