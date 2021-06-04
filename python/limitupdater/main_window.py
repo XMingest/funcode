@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import functools
+import sys
 import time
 from pathlib import Path
 
 import qdarkstyle
 from PySide2 import QtCore
-from PySide2.QtGui import QColor
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QColor, QIcon
 from PySide2.QtWidgets import QFileDialog, QMainWindow, QMessageBox, QTreeWidgetItem
 
 from limit_xml import LimitXml
@@ -22,6 +24,14 @@ class MainWindow(QMainWindow):
         ui = Ui_MainWindow()
         self.ui = ui
         ui.setupUi(self)
+        # 图标
+        try:
+            icon = QIcon()
+            # sys._MEIPASS为pyinstaller编译为单文件模式后释出资源的路径
+            icon.addFile(f'{(Path(sys._MEIPASS) / "icon.ico").resolve()}', QSize(), QIcon.Normal, QIcon.Off)
+            self.setWindowIcon(icon)
+        except AttributeError:
+            self.logging('未找到图标文件')
         # 美化
         self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
         # 获取加载ui后的原始标题

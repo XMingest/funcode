@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string>极差合入工具</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="font">
     <font>

@@ -18,7 +18,6 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1280, 720)
-        MainWindow.setStyleSheet(u"")
         self.act_load = QAction(MainWindow)
         self.act_load.setObjectName(u"act_load")
         self.act_output = QAction(MainWindow)
