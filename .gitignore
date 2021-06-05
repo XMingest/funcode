@@ -12,3 +12,4 @@ build
 dist
 languageServers-log
 target
+ui_main_window.py

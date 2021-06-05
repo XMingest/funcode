@@ -109,7 +109,6 @@ class ComputerOn:
         }
 
     def calc_month(self,
-                   contain_weekends: bool = False,
                    month: int = None,
                    year: int = None,
                    ) -> dict or None:
@@ -129,19 +128,29 @@ class ComputerOn:
             return None
         data = {}
         total = datetime.timedelta(0)
+        overday = []
+        wend_overtime = datetime.timedelta(0)
+        workday = 0
         for day in range(1, 32):
             if day in day_during:
                 start_time = day_during[day]['start']
                 end_time = day_during[day]['end']
                 during = self.get_during(start_time, end_time)
-                data[day] = {
-                    'during': f'{round(during.total_seconds() / 3600, 2)}',
-                    'end': end_time,
-                    'start': start_time,
-                }
-                if contain_weekends or datetime.date(year, month, day).weekday() < 5:
+                data[f'{month}/{day}'] = (f'{start_time.strftime("%H:%M:%S")} ~ '
+                                          f'{end_time.strftime("%H:%M:%S")} = '
+                                          f'{round(during.total_seconds() / 3600, 2)}小时')
+                if datetime.date(year, month, day).weekday() < 5:
+                    workday += 1
                     total += during
-        data['total'] = f'{round(total.total_seconds() / 3600, 2)}'
+                else:
+                    overday.append(f'{month}/{day}')
+                    wend_overtime += during
+                    data[f'{month}/{day}'] += '（周末）'
+        data['工作时长'] = round(total.total_seconds() / 3600, 2)
+        data['正常工日'] = workday
+        data['平时加班'] = round(data['工作时长'] - workday * 8, 2)
+        data['周末加班'] = ' '.join(overday)
+        data['周末时长'] = round(wend_overtime.total_seconds() / 3600, 2)
         return data
 
 

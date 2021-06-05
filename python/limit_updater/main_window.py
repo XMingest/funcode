@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         except AttributeError:
             self.logging('未找到图标文件')
         # 美化
-        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyside2())
         # 获取加载ui后的原始标题
         self.origin_title = self.windowTitle()
         # 结构视图调整
