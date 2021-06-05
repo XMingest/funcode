@@ -81,7 +81,11 @@ class ComputerOn:
                 break
         return
 
-    def calc_day(self, mday: int = None, month: int = None, year: int = None) -> dict or None:
+    def calc_day(self,
+                 mday: int = None,
+                 month: int = None,
+                 year: int = None,
+                 ) -> dict or None:
         """
         通过电脑开启时间计算某年某月某日工时
         :param mday:
@@ -104,7 +108,11 @@ class ComputerOn:
             'start': day_during["start"],
         }
 
-    def calc_month(self, month: int = None, year: int = None) -> dict or None:
+    def calc_month(self,
+                   contain_weekends: bool = False,
+                   month: int = None,
+                   year: int = None,
+                   ) -> dict or None:
         """
         通过电脑开启时间计算某年某月工时
         :param month: 默认当月
@@ -131,7 +139,8 @@ class ComputerOn:
                     'end': end_time,
                     'start': start_time,
                 }
-                total += during
+                if contain_weekends or datetime.date(year, month, day).weekday() < 5:
+                    total += during
         data['total'] = f'{round(total.total_seconds() / 3600, 2)}'
         return data
 

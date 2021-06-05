@@ -2,6 +2,7 @@ fire
 jupyter
 matplotlib
 openpyxl
+pyqtgraph
 PySide2
 pywin32
 QDarkStyle
