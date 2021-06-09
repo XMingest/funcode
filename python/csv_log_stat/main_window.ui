@@ -28,13 +28,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="btn_out_xlsx">
-        <property name="text">
-         <string notr="true">导出表格</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="title">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -128,14 +121,7 @@
       <item>
        <layout class="QVBoxLayout" name="data_display">
         <item>
-         <widget class="QGraphicsView" name="data_chart">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="data_chart_container"/>
         </item>
         <item>
          <widget class="QProgressBar" name="data_loading">
