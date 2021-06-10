@@ -4,6 +4,7 @@
 .venv
 .vscode
 *.egg*
+*.exe*
 *.py[cod]
 *.spec
 *$py.class
