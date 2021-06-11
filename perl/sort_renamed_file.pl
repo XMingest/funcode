@@ -6,46 +6,53 @@ use File::Copy;
 use Getopt::Long;
 
 GetOptions(
-           q(ext=s) => \$ext,
-           q(from=s) => \$from,
-           q(to=s) => \$to,
-          );
+   q(from=s) => \$from,
+   q(to=s) => \$to,
+);
 
-if (-d qq($from) and -d qq($to) and defined($ext))
+sub md5f
 {
-  my @files = glob(qq($from/*.$ext));
-  my @sorted_file = sort
-  {
-    open(DATA, qq(<$a));
-    $da = Digest::MD5->new->addfile(*DATA)->hexdigest;
-    close(DATA);
-    open(DATA, qq(<$b));
-    $db = Digest::MD5->new->addfile(*DATA)->hexdigest;
-    close(DATA);
-    $da cmp $db;
-  } @files;
-  my $index = 0;
-  my $limit = length(@sorted_file - 1) + 2;
-  foreach my $file (@sorted_file)
-  {
-    my $new_file = $file;
-    $new_file =~ s/.*\.//;
-    while (length($index) < $limit)
+    my $file = shift(@_);
+    open(my $fh, q(<), $file);
+    binmode($fh);
+    $md5_obj = Digest::MD5->new;
+    while (<$fh>)
     {
-      $index = q(0) . $index;
+        $md5_obj->add($_);
     }
-    $new_file = qq($to/$index.$new_file);
-    say(qq($file -> $new_file));
-    copy(qq($file), qq($new_file));
-    $index += 1;
-  }
+    close($fh);
+    return $md5_obj->hexdigest;
+}
+
+if (-d qq($from) and -d qq($to))
+{
+    my %md5_file = ();
+    foreach my $file (glob(qq($from/*)))
+    {
+        $md5_file{md5f($file)} = $file;
+    }
+    my $index = 0;
+    my $limit = length(keys(%md5_file) - 1) + 2;
+    foreach my $md5 (keys(%md5_file))
+    {
+        my $file = $md5_file{$md5};
+        my $new_file = $file;
+        $new_file =~ s/.*\.//;
+        while (length($index) < $limit)
+        {
+            $index = q(0) . $index;
+        }
+        $new_file = qq($to/$index.$new_file);
+        say(qq($file -> $new_file));
+        copy(qq($file), qq($new_file));
+        $index += 1;
+    }
 }
 else
 {
-  say(q(Usage:
-        --from=<Handle Directory>
-        --to=<Save Directory>
-        --ext=<Handle File With Extension>));
+    say(q(Usage:
+            --from=<Handle Directory>
+            --to=<Save Directory>));
 }
 
 __END__
