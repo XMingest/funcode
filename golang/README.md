@@ -44,5 +44,9 @@ go env -w GOPROXY=http://mirrors.tools.huawei.com/goproxy/
 
 # REF
 
+- [基础知识 - Golang 中的正则表达式](https://www.cnblogs.com/golove/p/3269099.html)
 - [Go REPL](https://github.com/sbinet/igo)
+- [go标准库的学习-time](https://www.cnblogs.com/wanghui-garcia/p/10341865.html)
+- [Go语言从入门到精通 -【web项目实战篇】- 完整的web项目](https://www.cnblogs.com/Survivalist/articles/10596106.html)
+- [Go语言fmt.Printf使用指南（占位符总结）](https://www.cnblogs.com/forever521Lee/p/10700549.html)
 - [unknown/the-way-to-go_ZH_CN](https://github.com/unknwon/the-way-to-go_ZH_CN)

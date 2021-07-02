@@ -1,8 +1,27 @@
+# tips
+
+## 元数据
+
+```sql
+-- mariadb
+SELECT table_name FROM information_schema.tables WHERE table_schema='database_name' AND table_type='base table';
+-- oracle
+SELECT * FROM user_tables;
+-- pgsql
+SELECT tablename FROM pg_tables WHERE tablename NOT LIKE 'pg%' AND tablename NOT LIKE 'sql_%';
+-- sqlite
+SELECT name FROM sqlite_master WHERE type='table';
+-- sqlserver
+select * from sysdatabases;
+SELECT * FROM sysobjects WHERE xtype='S';
+SELECT * FROM sysobjects WHERE xtype='U';
+```
+
 # mysql
 
 ## windows
 
-可在各大镜像源下载，建议下载zip包，如`mysql-8.0.21-winx64.zip`
+可在各大镜像源下载，建议下载 zip 包，如`mysql-8.0.21-winx64.zip`
 
 解压后添加`bin`至系统`PATH`
 
@@ -22,7 +41,7 @@ mysqladmin -u${user} -p${pswd} password ${new_pswd}
 
 `load data`通常效率高于`insert`
 
-而`insert into ${table_name} values (...), (...)`通常效率高于分别写两条insert
+而`insert into ${table_name} values (...), (...)`通常效率高于分别写两条 insert
 
 有索引的情况下效率会降低
 

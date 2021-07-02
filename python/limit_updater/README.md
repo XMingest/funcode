@@ -7,6 +7,7 @@
 ## pyinstaller
 
 1. 基本环境
+
 ```shell
 python -m venv pyvenv
 cd pyvenv
@@ -16,7 +17,7 @@ python -m pip install -U pip setuptools
 pip install openpyxl pyinstaller PySide2 QDarkStyle
 # TODO: icon图标文件处理
 cp Lib/site-packages/shiboken2/shiboken2.abi3.dll Lib/site-packages/PySide2  # 解决WARNING: lib not found: shiboken2.abi3.dll
-pyinstaller --add-data "icon.ico;." -F -i icon.ico -n 极差修改工具 -w __main__.py  # add-data中的图标文件名在程序中规定，不能更改，但`-i icon.ico`可以与其不同
+pyinstaller -F -i icon.ico -n 极差修改工具 -w __main__.py  # add-data中的图标文件名在程序中规定，不能更改，但`-i icon.ico`可以与其不同
 ```
 
 ## ui to py
