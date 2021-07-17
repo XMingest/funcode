@@ -48,19 +48,17 @@ export PS1='\n╭\[\e[31m\]AT\[\e[0m\] \[\e[32m\]\t\[\e[0m\] \[\e[31m\]IN\[\e[0m
 
 # alias
 alias cnvgbk='iconv -f gbk'
-alias cp='cp -v'
-alias la='ls -A --color=auto'
-alias ll='ls -hl --color=auto'
-alias ls='ls --color=auto'
-alias mv='mv -v'
-alias rm='rm -v'
+alias code='/c/Program\ Files/VSCode/Code'
+alias git='/d/Programs/Git/cmd/git'
+alias la='ls -A'
+alias ll='ls -hl'
 
 # path
-PATH='/usr/local/bin:/usr/bin:/bin:/opt/bin'
-PATH="$PATH:/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl"
-PATH="$PATH:/mingw64/bin"
-PATH="$PATH:/c/Windows/SysWOW64:/c/Windows:/c/Windows/SysWOW64/Wbem:/c/Windows/SysWOW64/WindowsPowerShell/v1.0/"
-PATH="$PATH:/c/Users/${user}/.cargo/bin"
+PATH="/mingw64/bin:/mingw64/bin/core_perl:/mingw64/bin/site_perl/5.28.0:/mingw64/bin/vendor_perl"
+PATH="$PATH:/c/Users/X_Mingest/.cargo/bin"
+PATH="$PATH:/usr/local/bin:/usr/bin:/bin"
+PATH="$PATH:/c/Windows/SysWOW64:/c/Windows:/c/Windows/SysWOW64/Wbem:/c/Windows/SysWOW64/WindowsPowerShell/v1.0"
+PATH="$PATH:/d/Programs/node"
 ```
 
 # 依赖
